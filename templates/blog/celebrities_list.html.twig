@@ -1,0 +1,58 @@
+{% extends 'base.html.twig' %}
+
+
+{% block main %}
+
+    {# style writed here because app.scss edit do not update #}
+    <style>
+        #celebrities{
+            display:flex;
+            flex-direction: column;
+            gap: 50px;
+        }
+        #celebrity{
+            display: flex;
+            width: 140%;
+            align-items:center;
+            gap: 40px;
+        }
+        #celebrity_data{
+            display:flex;
+            flex-direction: column;
+            gap:5px;
+        }
+        #celebrity_data p {
+            margin:0;
+            padding:0;
+        }
+    </style>
+
+    <div id="celebrities">
+        {% for celebrity in celebrities %}
+          {% if celebrity.image == null %}
+            <div id="celebrity">
+                <img src="{{asset('uploads/celebrities/unknown.png')}}" width=400 height=300/>
+                <div id="celebrity_data">
+                    <h1 style="color:#18bc9c">{{celebrity.fullName}}</h1>
+                    <p><b>Date de Naissance : </b>{{celebrity.dateDeNaissance | date('d-m-Y')}}</p>
+                    <p><b>Date de Mort :</b> {{celebrity.dateDeMort | date('d-m-Y')}}</p>
+                    <p><b>Age à sa mort :</b> {{celebrity.ageAtDeath}}</p>
+                    <p><b>Description : </b>{{celebrity.description}}</p>
+                </div>
+            </div>
+            {% else %}
+              <div id="celebrity">
+                  <img src="{{asset('uploads/celebrities/' ~ celebrity.image)}}" width=400 height=300/>
+                  <div id="celebrity_data">
+                      <h1 style="color:#18bc9c">{{celebrity.fullName}}</h1>
+                      <p><b>Date de Naissance : </b>{{celebrity.dateDeNaissance | date('d-m-Y')}}</p>
+                      <p><b>Date de Mort :</b> {{celebrity.dateDeMort | date('d-m-Y')}}</p>
+                      <p><b>Age à sa mort :</b> {{celebrity.ageAtDeath}}</p>
+                      <p><b>Description : </b>{{celebrity.description}}</p>
+                  </div>
+              </div>
+          {% endif %}
+        {% endfor %}
+    </div>
+
+{% endblock %}
